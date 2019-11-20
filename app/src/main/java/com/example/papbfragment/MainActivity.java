@@ -26,7 +26,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        String Message;
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras == null) {
+                Message= null;
+            } else {
+                Message= extras.getString("KEY_MESSAGE");
+            }
+        } else {
+            Message= (String) savedInstanceState.getSerializable("KEY_MESSAGE");
+        }
+
         setupViews();
+        _textCurrentFragment.setText("Current Fragment : " + Message);
+
 
         // set listener
         _buttonSendMessage.setOnClickListener(new View.OnClickListener() {
